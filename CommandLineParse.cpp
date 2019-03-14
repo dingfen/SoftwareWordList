@@ -3,9 +3,14 @@
 #include <fstream>
 #include <string>
 #include <ctype.h>
+
+#include "WordGraph.h"
+
 using namespace std;
 
 #define MAXFILENAME 64
+
+
 int main(int argc, char *argv[])
 {
     int opt;
@@ -55,13 +60,10 @@ int main(int argc, char *argv[])
             break;
         }
     }
-    // cout << optind <<endl;
-
-    ifstream fin;
-    fin.open(filename.c_str(), ios::in);
-    if(!fin) {
-        cerr<<"The file "<<filename.c_str()<<"cannot be found.\n"<<endl;
-    }
-    fin.close();
+    
+    // 创建图结构
+    WordGraph G;
+    G.create(filename);
+    
     return 0;
 }
