@@ -9,6 +9,10 @@ Qt 5
 linux or Mac
 
 C++
+## 如何运行
+`> g++ -std=c++11 *.cpp -o WordList`
+
+`> ./WordList -c we.txt `
 
 ## 小组成员
 
