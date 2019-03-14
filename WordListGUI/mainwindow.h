@@ -3,7 +3,6 @@
 
 #include <QMainWindow>
 #include <QFileDialog>
-#include <QPlainTextEdit>
 
 namespace Ui {
 class MainWindow;

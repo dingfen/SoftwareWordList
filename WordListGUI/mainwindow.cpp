@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "dialog.h"
 #include <QDebug>
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -36,6 +37,6 @@ void MainWindow::loadFromFile()
 
 void MainWindow::loadFromKB()
 {
-    QPlainTextEdit *text = new QPlainTextEdit();
-    text->show();
+    Dialog *dialog = new Dialog(this);
+    dialog->show();
 }
