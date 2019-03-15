@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QFileDialog>
+#include <QFile>
 
 namespace Ui {
 class MainWindow;
@@ -19,6 +20,7 @@ public:
 private slots:
     void loadFromFile();
     void loadFromKB();
+    void store();
 
 private:
     Ui::MainWindow *ui;

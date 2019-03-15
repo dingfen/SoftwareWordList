@@ -22,6 +22,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     QObject::connect(loadAct[0], SIGNAL(triggered(bool)), this, SLOT(loadFromFile()));
     QObject::connect(loadAct[1], SIGNAL(triggered(bool)), this, SLOT(loadFromKB()));
+    QObject::connect(ui->pushButton, SIGNAL(clicked()), this, SLOT(store()));
 }
 
 MainWindow::~MainWindow()
@@ -31,7 +32,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::loadFromFile()
 {
-    QString fileName = QFileDialog::getOpenFileName(this, "导入", ".", "*.*");
+    QString fileName = QFileDialog::getOpenFileName(this, "导入", "/", "*.txt");
     qDebug() << fileName;
 }
 
@@ -39,4 +40,14 @@ void MainWindow::loadFromKB()
 {
     Dialog *dialog = new Dialog(this);
     dialog->show();
+}
+
+void MainWindow::store()
+{
+    QString text = ui->plainTextEdit->toPlainText();
+    QString fileName = QFileDialog::getSaveFileName(this, "导出", "/home", "*.*");
+    QFile file(fileName);
+    file.open(QIODevice::WriteOnly | QIODevice::Text);
+    file.write(text.toUtf8());
+    file.close();
 }
