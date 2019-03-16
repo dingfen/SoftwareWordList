@@ -20,6 +20,11 @@ public:
 
     // 给定文件路径，创建图
     void create(string path);
+    // 若求最长单词链，num=0,若不规定头尾字母，head,tail='\0'
+    // 求最长的单词链
+    vector<string> wordDFS(char head='\0', char tail='\0', int num=0);
+    // 求最长的字母链
+    vector<string> alphaDFS(char head='\0', char tail='\0', int num=0);
 };
 
 

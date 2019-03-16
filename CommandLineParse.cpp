@@ -8,8 +8,6 @@
 
 using namespace std;
 
-#define MAXFILENAME 64
-
 
 int main(int argc, char *argv[])
 {
@@ -55,7 +53,7 @@ int main(int argc, char *argv[])
                 cerr << "-n must be followed by a interger" << endl;
             break;
         case '?':
-            cerr << "error optopt: " << optopt << endl;
+            cerr << "unknown option: " << (char)optopt << endl;
             cerr << "error opterr: " << opterr << endl;
             break;
         }
@@ -64,6 +62,11 @@ int main(int argc, char *argv[])
     // 创建图结构
     WordGraph G;
     G.create(filename);
+    
+    if(wordOrLetter)
+        G.wordDFS(head, tail, numWord);
+    else
+        G.alphaDFS(head, tail, numWord);
     
     return 0;
 }

@@ -60,3 +60,15 @@ void WordGraph::create(string filename)
     }
     fin.close();
 }
+
+
+vector<string> WordGraph::wordDFS(char head='\0', char tail='\0', int num=0)
+{
+    
+}
+
+
+vector<string> WordGraph::alphaDFS(char head='\0', char tail='\0', int num=0)
+{
+    
+}
