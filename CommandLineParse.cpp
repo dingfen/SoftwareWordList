@@ -63,10 +63,15 @@ int main(int argc, char *argv[])
     WordGraph G;
     G.create(filename);
     
+    vector<string> ret;
+
     if(wordOrLetter)
-        G.wordDFS(head, tail, numWord);
+        ret = G.wordDFS(head, tail, numWord);
     else
         G.alphaDFS(head, tail, numWord);
+
+    for(auto s : ret) 
+        cout<<s<<endl;
     
     return 0;
 }
