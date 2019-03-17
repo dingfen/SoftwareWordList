@@ -68,7 +68,7 @@ int main(int argc, char *argv[])
     if(wordOrLetter)
         ret = G.wordDFS(head, tail, numWord);
     else
-        G.alphaDFS(head, tail, numWord);
+        ret = G.alphaDFS(head, tail, numWord);
 
     for(auto s : ret) 
         cout<<s<<endl;
