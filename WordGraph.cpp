@@ -78,11 +78,14 @@ vector<string> WordGraph::wordDFS(char head, char tail, int num)
         return max;
     }
     else if(head == '\0' && tail != '\0') {
-        
+        ret.clear();
+        reverseLongestWordList(tail);
+        return max;
     }
     else if(head != '\0' && tail == '\0') {
         ret.clear();
         findLongestWordList(head);
+        return max;
     }
     else {
 
@@ -93,5 +96,24 @@ vector<string> WordGraph::wordDFS(char head, char tail, int num)
 
 vector<string> WordGraph::alphaDFS(char head, char tail, int num)
 {
-    
+    if(head == '\0' && tail == '\0') {
+        for(auto w : heads) {
+            ret.clear();
+            findLongestAlphaList(w);
+        }
+        return max;
+    }
+    else if(head == '\0' && tail != '\0') {
+        ret.clear();
+        reverseLongestAlphaList(tail);
+        return max;
+    }
+    else if(head != '\0' && tail == '\0') {
+        ret.clear();
+        findLongestAlphaList(head);
+        return max;
+    }
+    else {
+        
+    }
 }
