@@ -20,6 +20,7 @@ int main(int argc, char *argv[])
     int numWord = 0;
     // 统计字母时为 false 统计单词为 true
     bool wordOrLetter = true;
+    int flagOfMain = 0;
 
     const char *optstring = "c:w:h:t:n:";
     while ((opt = getopt(argc, argv, optstring)) != -1)
@@ -28,10 +29,12 @@ int main(int argc, char *argv[])
         {
         case 'c':
             wordOrLetter = false;
+            flagOfMain ++;
             filename = optarg;
             break;
         case 'w':
             wordOrLetter = true;
+            flagOfMain ++;
             filename = optarg;
             break;
         case 'h':
@@ -39,18 +42,21 @@ int main(int argc, char *argv[])
                 head = *optarg;
             else
                 cerr << "-h must be followed by a alpha" << endl;
+                exit(1);
             break;
         case 't':
             if (isalpha(*optarg))
                 tail = *optarg;
             else
                 cerr << "-t must be followed by a alpha" << endl;
+                exit(1);
             break;
         case 'n':
             if (isdigit(*optarg))
                 numWord = *optarg - '0';
             else
                 cerr << "-n must be followed by a interger" << endl;
+                exit(1);
             break;
         case '?':
             cerr << "unknown option: " << (char)optopt << endl;
@@ -58,7 +64,16 @@ int main(int argc, char *argv[])
             break;
         }
     }
-    
+    if(flagOfMain != 1){
+        if( flagOfMain > 1 ){
+            cerr << "multiple main instructions" << endl;
+            exit(1);
+        }
+        if( flagOfMain == 0 ){
+            cerr << "No main instruction" << endl;
+            exit(1);
+        }
+    }
     // 创建图结构
     WordGraph G;
     G.create(filename);
