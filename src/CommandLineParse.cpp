@@ -20,43 +20,49 @@ int main(int argc, char *argv[])
     int numWord = 0;
     // 统计字母时为 false 统计单词为 true
     bool wordOrLetter = true;
+    //用于指示作为程序核心的-c和-w指令的出现次数
     int flagOfMain = 0;
 
     const char *optstring = "c:w:h:t:n:";
+    //循环处理命令
     while ((opt = getopt(argc, argv, optstring)) != -1)
     {
         switch (opt)
         {
-        case 'c':
+        case 'c'://指定最大字母总数
             wordOrLetter = false;
             flagOfMain ++;
             filename = optarg;
             break;
-        case 'w':
+        case 'w'://指定最大单词数
             wordOrLetter = true;
             flagOfMain ++;
             filename = optarg;
             break;
-        case 'h':
+        case 'h'://指定首字母
             if (isalpha(*optarg))
                 head = *optarg;
-            else
+            else{
+                //不是合法字母时报错
                 cerr << "-h must be followed by a alpha" << endl;
                 exit(1);
+            }
             break;
-        case 't':
+        case 't'://指定结束字母
             if (isalpha(*optarg))
                 tail = *optarg;
-            else
+            else{
+                //非法报错
                 cerr << "-t must be followed by a alpha" << endl;
                 exit(1);
+            }
             break;
-        case 'n':
-            if (isdigit(*optarg))
-                numWord = *optarg - '0';
-            else
+        case 'n'://指定单词个数
+            numWord = atoi(optarg);
+            if(!numWord){
                 cerr << "-n must be followed by a interger" << endl;
                 exit(1);
+            }
             break;
         case '?':
             cerr << "unknown option: " << (char)optopt << endl;
@@ -64,7 +70,7 @@ int main(int argc, char *argv[])
             break;
         }
     }
-    if(flagOfMain != 1){
+    if(flagOfMain != 1){//当未出现或重复出现主命令时报错退出
         if( flagOfMain > 1 ){
             cerr << "multiple main instructions" << endl;
             exit(1);
