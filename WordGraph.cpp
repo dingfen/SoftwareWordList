@@ -88,7 +88,9 @@ vector<string> WordGraph::wordDFS(char head, char tail, int num)
         return max;
     }
     else {
-
+        ret.clear();
+        findLongestWordList(head,tail);
+        return max;
     }
     
 }
@@ -114,6 +116,8 @@ vector<string> WordGraph::alphaDFS(char head, char tail, int num)
         return max;
     }
     else {
-        
+        ret.clear();
+        findLongestAlphaList(head, tail);
+        return max;
     }
 }

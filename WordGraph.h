@@ -39,6 +39,24 @@ private:
         }
     }
 
+    void findLongestWordList(char beg, char end) {
+        for(auto line : table[beg-'a']) {
+            for(auto s : line) {
+                if(words[s]==false) {
+                    words[s]=true;
+                    ret.push_back(s);
+                    findLongestWordList(s.back(),end);
+                    
+                    if(ret.back().back() == end)
+                        if(ret.size()>max.size())
+                            max = ret;
+                    ret.pop_back();
+                    words[s]=false;
+                }
+            }
+        }
+    }
+
     // 单词： 递归方法反向寻找最长链
     void reverseLongestWordList(char end) {
         for(int i=0;i<26;i++) {
@@ -69,6 +87,28 @@ private:
                     if(alphalenth > maxalphalength) {
                         maxalphalength = alphalenth;
                         max = ret;
+                    }
+                    alphalenth -= s.size();
+                    ret.pop_back();
+                    words[s]=false;
+                }
+            }
+        }
+    }
+
+    void findLongestAlphaList(char beg, char end) {
+        for(auto line : table[beg-'a']) {
+            for(auto s : line) {
+                if(words[s]==false) {
+                    words[s]=true;
+                    ret.push_back(s);
+                    alphalenth += s.size();
+                    findLongestAlphaList(s.back(), end);
+
+                    if(ret.back().back() == end)
+                        if(alphalenth > maxalphalength) {
+                            maxalphalength = alphalenth;
+                            max = ret;
                     }
                     alphalenth -= s.size();
                     ret.pop_back();
