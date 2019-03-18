@@ -64,43 +64,43 @@ void WordGraph::create(string filename)
     fin.close();
 }
 
+
+vector<vector<string>> WordGraph::getList()
+{
+    return List;
+}
+
 vector<string> WordGraph::wordDFS(char head, char tail, int num)
 {
     // 遍历所有的单词，然后DFS 求出最长的单词链 并保存
-    if (num == 0)
+    if (head == '\0' && tail == '\0')
     {
-        if (head == '\0' && tail == '\0')
+        // 直接求最长链
+        for (auto w : heads)
         {
-            // 直接求最长链
-            for (auto w : heads)
-            {
-                // 取出首字母
-                ret.clear();
-                findLongestWordList(w);
-            }
-            return max;
-        }
-        else if (head == '\0' && tail != '\0')
-        {
+            // 取出首字母
             ret.clear();
-            reverseLongestWordList(tail);
-            return max;
+            findLongestWordList(w, num);
         }
-        else if (head != '\0' && tail == '\0')
-        {
-            ret.clear();
-            findLongestWordList(head);
-            return max;
-        }
-        else
-        {
-            ret.clear();
-            findLongestWordList(head, tail);
-            return max;
-        }
+        return max;
+    }
+    else if (head == '\0' && tail != '\0')
+    {
+        ret.clear();
+        reverseLongestWordList(tail, num);
+        return max;
+    }
+    else if (head != '\0' && tail == '\0')
+    {
+        ret.clear();
+        findLongestWordList(head, num);
+        return max;
     }
     else
     {
+        ret.clear();
+        findLongestWordList(head, tail, num);
+        return max;
     }
 }
 
@@ -112,26 +112,26 @@ vector<string> WordGraph::alphaDFS(char head, char tail, int num)
         for (auto w : heads)
         {
             ret.clear();
-            findLongestAlphaList(w);
+            findLongestAlphaList(w, num);
         }
         return max;
     }
     else if (head == '\0' && tail != '\0')
     {
         ret.clear();
-        reverseLongestAlphaList(tail);
+        reverseLongestAlphaList(tail, num);
         return max;
     }
     else if (head != '\0' && tail == '\0')
     {
         ret.clear();
-        findLongestAlphaList(head);
+        findLongestAlphaList(head, num);
         return max;
     }
     else
     {
         ret.clear();
-        findLongestAlphaList(head, tail);
+        findLongestAlphaList(head, tail, num);
         return max;
     }
 }

@@ -17,7 +17,7 @@ int main(int argc, char *argv[])
     char head = '\0';
     char tail = '\0';
     // 要求单词链有几个单词
-    int numWord = 0;
+    volatile int numWord = -1;
     // 统计字母时为 false 统计单词为 true
     bool wordOrLetter = true;
     int flagOfMain = 0;
@@ -64,6 +64,7 @@ int main(int argc, char *argv[])
             break;
         }
     }
+
     if(flagOfMain != 1){
         if( flagOfMain > 1 ){
             cerr << "multiple main instructions" << endl;
@@ -74,19 +75,32 @@ int main(int argc, char *argv[])
             exit(1);
         }
     }
+    
     // 创建图结构
     WordGraph G;
     G.create(filename);
     
     vector<string> ret;
 
-    if(wordOrLetter)
-        ret = G.wordDFS(head, tail, numWord);
-    else
-        ret = G.alphaDFS(head, tail, numWord);
-
-    for(auto s : ret) 
-        cout<<s<<endl;
-    
+    if (numWord == -1) {
+        if (wordOrLetter)
+            ret = G.wordDFS(head, tail, numWord);
+        else
+            ret = G.alphaDFS(head, tail, numWord);
+        for(auto s : ret) 
+            cout<<s<<endl;
+    }
+    else 
+    {   
+        if (wordOrLetter)
+            ret = G.wordDFS(head, tail, numWord);
+        else
+            ret = G.alphaDFS(head, tail, numWord);
+        for(auto group : G.getList()) {
+            for(auto s : group)
+                cout<<s<<endl;
+            cout<<"\n";
+        }
+    }
     return 0;
 }

@@ -17,35 +17,68 @@ private:
     
     vector<string> table[26][26];   // 图的邻接矩阵 table[2][3] 指示 c->d
 
+    vector<vector<string>> List;
+
+    // 递归需要用到的变量
     vector<string> max;
     int alphalenth=0;
     int maxalphalength=0;
     vector<string> ret;
 
     // 单词： 递归方法寻找最长链
-    void findLongestWordList(char beg) {
-        for(auto line : table[beg-'a']) {
-            for(auto s : line) {
-                if(words[s]==false) {
-                    words[s]=true;
-                    ret.push_back(s);
-                    findLongestWordList(s.back());
-                    if(ret.size()>max.size())
-                        max = ret;
-                    ret.pop_back();
-                    words[s]=false;
+    void findLongestWordList(char beg, int num) {
+        if(num == 0)
+            return;
+
+        // 没有 -n 限制
+        if (num == -1)
+        {
+            for (auto line : table[beg - 'a'])
+            {
+                for (auto s : line)
+                {
+                    if (words[s] == false)
+                    {
+                        words[s] = true;
+                        ret.push_back(s);
+                        findLongestWordList(s.back(), num);
+                        if (ret.size() > max.size())
+                            max = ret;
+                        ret.pop_back();
+                        words[s] = false;
+                    }
+                }
+            }
+        }
+        else {
+            // 有-n
+            for(auto line : table[beg-'a'])
+            {
+                for(auto s :line)
+                {
+                    if(words[s] == false)
+                    {
+                        words[s] = true;
+                        ret.push_back(s);
+                        num--;
+                        findLongestWordList(s.back(), num);
+                        if(num == 0)
+                            List.push_back(ret);
+                        ret.pop_back();
+                        words[s] = false;
+                    }
                 }
             }
         }
     }
 
-    void findLongestWordList(char beg, char end) {
+    void findLongestWordList(char beg, char end, int num) {
         for(auto line : table[beg-'a']) {
             for(auto s : line) {
                 if(words[s]==false) {
                     words[s]=true;
                     ret.push_back(s);
-                    findLongestWordList(s.back(),end);
+                    findLongestWordList(s.back(),end, num);
                     
                     if(ret.back().back() == end)
                         if(ret.size()>max.size())
@@ -58,14 +91,14 @@ private:
     }
 
     // 单词： 递归方法反向寻找最长链
-    void reverseLongestWordList(char end) {
+    void reverseLongestWordList(char end, int num) {
         for(int i=0;i<26;i++) {
             vector<string> line = table[i][end-'a'];
             for(auto s : line) {
                 if(words[s]==false) {
                     words[s]=true;
                     ret.push_back(s);
-                    reverseLongestWordList(s.front());
+                    reverseLongestWordList(s.front(), num);
                     if(ret.size()>max.size())
                         max = ret;
                     ret.pop_back();
@@ -76,50 +109,65 @@ private:
     }
 
     // 字母： 递归方法寻找最长链
-    void findLongestAlphaList(char beg) {
-        for(auto line : table[beg-'a']) {
-            for(auto s : line) {
-                if(words[s]==false) {
-                    words[s]=true;
-                    ret.push_back(s);
-                    alphalenth += s.size();
-                    findLongestAlphaList(s.back());
-                    if(alphalenth > maxalphalength) {
-                        maxalphalength = alphalenth;
-                        max = ret;
+    void findLongestAlphaList(char beg, int num) {
+        if (num == 0)
+        {
+            for (auto line : table[beg - 'a'])
+            {
+                for (auto s : line)
+                {
+                    if (words[s] == false)
+                    {
+                        words[s] = true;
+                        ret.push_back(s);
+                        alphalenth += s.size();
+                        findLongestAlphaList(s.back(), num);
+                        if (alphalenth > maxalphalength)
+                        {
+                            maxalphalength = alphalenth;
+                            max = ret;
+                        }
+                        alphalenth -= s.size();
+                        ret.pop_back();
+                        words[s] = false;
                     }
-                    alphalenth -= s.size();
-                    ret.pop_back();
-                    words[s]=false;
                 }
             }
+        }
+        else
+        {
         }
     }
 
-    void findLongestAlphaList(char beg, char end) {
-        for(auto line : table[beg-'a']) {
-            for(auto s : line) {
-                if(words[s]==false) {
-                    words[s]=true;
-                    ret.push_back(s);
-                    alphalenth += s.size();
-                    findLongestAlphaList(s.back(), end);
+        void findLongestAlphaList(char beg, char end, int num)
+        {
+            for (auto line : table[beg - 'a'])
+            {
+                for (auto s : line)
+                {
+                    if (words[s] == false)
+                    {
+                        words[s] = true;
+                        ret.push_back(s);
+                        alphalenth += s.size();
+                        findLongestAlphaList(s.back(), end, num);
 
-                    if(ret.back().back() == end)
-                        if(alphalenth > maxalphalength) {
-                            maxalphalength = alphalenth;
-                            max = ret;
+                        if (ret.back().back() == end)
+                            if (alphalenth > maxalphalength)
+                            {
+                                maxalphalength = alphalenth;
+                                max = ret;
+                            }
+                        alphalenth -= s.size();
+                        ret.pop_back();
+                        words[s] = false;
                     }
-                    alphalenth -= s.size();
-                    ret.pop_back();
-                    words[s]=false;
                 }
             }
-        }
     }
 
     // 字母： 
-    void reverseLongestAlphaList(char end) {
+    void reverseLongestAlphaList(char end, int num) {
         for(int i=0;i<26;i++) {
             vector<string> line = table[i][end-'a'];
             for(auto s : line) {
@@ -127,7 +175,7 @@ private:
                     words[s]=true;
                     ret.push_back(s);
                     alphalenth += s.size();
-                    reverseLongestAlphaList(s.front());
+                    reverseLongestAlphaList(s.front(), num);
                     if(alphalenth > maxalphalength) {
                         maxalphalength = alphalenth;
                         max = ret;
@@ -152,6 +200,8 @@ public:
     vector<string> wordDFS(char head, char tail, int num);
     // 求最长的字母链
     vector<string> alphaDFS(char head, char tail, int num);
+
+    vector<vector<string>> getList();
 };
 
 
