@@ -1,6 +1,7 @@
 #include "WordGraph.h"
 #include <fstream>
 #include <cctype>
+#include <algorithm>
 #include <cstdlib>
 
 unordered_map<string, bool> parseLine(string line)
@@ -88,6 +89,11 @@ vector<string> WordGraph::wordDFS(char head, char tail, int num)
     {
         ret.clear();
         reverseLongestWordList(tail, num);
+        reverse(max.begin(), max.end());
+        
+        if(num!=-1)
+            for(auto s : List)
+                reverse(s.begin(), s.end());
         return max;
     }
     else if (head != '\0' && tail == '\0')
@@ -120,6 +126,7 @@ vector<string> WordGraph::alphaDFS(char head, char tail, int num)
     {
         ret.clear();
         reverseLongestAlphaList(tail, num);
+        reverse(max.begin(), max.end());
         return max;
     }
     else if (head != '\0' && tail == '\0')
