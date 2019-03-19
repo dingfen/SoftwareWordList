@@ -92,7 +92,7 @@ vector<string> WordGraph::wordDFS(char head, char tail, int num)
         reverse(max.begin(), max.end());
         
         if(num!=-1)
-            for(auto s : List)
+            for(auto &s : List)
                 reverse(s.begin(), s.end());
         return max;
     }
