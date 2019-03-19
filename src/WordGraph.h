@@ -4,6 +4,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <set>
 #include <unordered_map>
 
 using namespace std;
@@ -12,8 +13,8 @@ class WordGraph
 {
 private:
     unordered_map<string, bool> words;           // 图的边集合
-    vector<char> heads;                     // 图的开头字母集合
-    vector<char> tails;                     // 图的结尾字母集合
+    set<char> heads;                     // 图的开头字母集合
+    set<char> tails;                     // 图的结尾字母集合
     
     vector<string> table[26][26];   // 图的邻接矩阵 table[2][3] 指示 c->d
 

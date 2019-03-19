@@ -58,8 +58,8 @@ void WordGraph::create(string filename)
         head = tolower(head);
         tail = tolower(tail);
         // cout<<head<<" "<<tail<<endl;
-        heads.push_back(head);
-        tails.push_back(tail);
+        heads.insert(head);
+        tails.insert(tail);
         this->table[head - 'a'][tail - 'a'].push_back(s.first);
     }
     fin.close();
