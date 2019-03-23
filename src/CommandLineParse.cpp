@@ -84,6 +84,13 @@ int main(int argc, char *argv[])
     // 创建图结构
     WordGraph G;
     G.create(filename);
+
+    auto words = G.getwords();
+    // 单词太少 无法组成单词链
+    if(words.size() < 2) {
+        cerr<< "Too few words in the file.None word list exists." <<endl;
+        exit(1);
+    }
     
     vector<string> ret;
 

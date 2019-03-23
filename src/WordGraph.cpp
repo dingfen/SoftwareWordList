@@ -83,7 +83,6 @@ vector<string> WordGraph::wordDFS(char head, char tail, int num)
             ret.clear();
             findLongestWordList(w, num);
         }
-        return max;
     }
     else if (head == '\0' && tail != '\0')
     {
@@ -94,20 +93,22 @@ vector<string> WordGraph::wordDFS(char head, char tail, int num)
         if(num!=-1)
             for(auto &s : List)
                 reverse(s.begin(), s.end());
-        return max;
     }
     else if (head != '\0' && tail == '\0')
     {
         ret.clear();
         findLongestWordList(head, num);
-        return max;
     }
     else
     {
         ret.clear();
         findLongestWordList(head, tail, num);
-        return max;
     }
+    if(max.size() < 2 && List.size() == 0) {
+        cerr<< "None word list exists." <<endl;
+        exit(1);
+    }
+    return max;
 }
 
 
@@ -120,25 +121,32 @@ vector<string> WordGraph::alphaDFS(char head, char tail, int num)
             ret.clear();
             findLongestAlphaList(w, num);
         }
-        return max;
     }
     else if (head == '\0' && tail != '\0')
     {
         ret.clear();
         reverseLongestAlphaList(tail, num);
         reverse(max.begin(), max.end());
-        return max;
     }
     else if (head != '\0' && tail == '\0')
     {
         ret.clear();
         findLongestAlphaList(head, num);
-        return max;
     }
     else
     {
         ret.clear();
         findLongestAlphaList(head, tail, num);
-        return max;
     }
+    if(max.size() < 2 && List.size() == 0) {
+        cerr<< "None word list exists." <<endl;
+        exit(1);
+    }
+    return max;
+}
+
+
+unordered_map<string, bool> WordGraph::getwords()
+{
+    return this->words;
 }

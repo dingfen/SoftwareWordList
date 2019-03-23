@@ -42,7 +42,9 @@ private:
                     {
                         words[s] = true;
                         ret.push_back(s);
+                        // 递归深搜 将 s的尾字母当下一个的开头传入
                         findLongestWordList(s.back(), num);
+                        // 取出最长的单词链
                         if (ret.size() > max.size())
                             max = ret;
                         ret.pop_back();
@@ -122,7 +124,7 @@ private:
         }
     }
 
-    // 单词： 递归方法反向寻找最长链
+    // 单词： 递归方法反向寻找最长链 实现原理同上
     void reverseLongestWordList(char end, int num) {
         if(num == 0)
             return ;
@@ -260,6 +262,8 @@ public:
     vector<string> alphaDFS(char head, char tail, int num);
 
     vector<vector<string>> getList();
+
+    unordered_map<string, bool> getwords();
 };
 
 

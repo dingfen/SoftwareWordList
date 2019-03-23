@@ -4,19 +4,33 @@
 
 ## 编程环境
 
-Qt 5 
+Qt 5.12 
 
-linux or Mac
+linux Ubuntu 16.04 or Mac
 
-C++
+C++11
+
 ## 如何运行
-`> g++ -std=c++11 *.cpp -o WordList`
 
-`> ./WordList -c we.txt `
+### 命令行部分
+在项目目录中，打开命令行，并进行编译
+
+`> make`
+
+Usage:  
+
+`> bin/WordList [ OPTIONS ] [-c] or [-w] FILE`
+
+Example:    
+
+`> bin/WordList -n 3 -w  FILE`
+
+### Qt GUI部分
 
 ## 小组成员
 
 组长：丁峰	 组员：谢灵江 连家诚
+
 
 ## 会议记录
 
