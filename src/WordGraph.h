@@ -186,9 +186,10 @@ private:
                     ret.push_back(s);
                     alphalenth += s.size();
                     findLongestAlphaList(s.back(), num);
+                    if(ret.size() > 1)
                     if (alphalenth > maxalphalength)
                     {
-                        maxalphalength = alphalenth;
+                        maxalphalength = alphalenth;    
                         max = ret;
                     }
                     alphalenth -= s.size();
@@ -213,6 +214,7 @@ private:
                     findLongestAlphaList(s.back(), end, num);
 
                     if (ret.back().back() == end)
+                        if(ret.size() > 1)
                         if (alphalenth > maxalphalength)
                         {
                             maxalphalength = alphalenth;
@@ -236,9 +238,10 @@ private:
                     ret.push_back(s);
                     alphalenth += s.size();
                     reverseLongestAlphaList(s.front(), num);
-                    if(alphalenth > maxalphalength) {
-                        maxalphalength = alphalenth;
-                        max = ret;
+                    if(ret.size() > 1)
+                        if(alphalenth > maxalphalength) {
+                            maxalphalength = alphalenth;    
+                            max = ret;
                     }
                     alphalenth -= s.size();
                     ret.pop_back();

@@ -138,10 +138,6 @@ vector<string> WordGraph::alphaDFS(char head, char tail, int num)
         ret.clear();
         findLongestAlphaList(head, tail, num);
     }
-    if(max.size() < 2 && List.size() == 0) {
-        cerr<< "None word list exists." <<endl;
-        exit(1);
-    }
     return max;
 }
 
