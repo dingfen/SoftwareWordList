@@ -94,13 +94,16 @@ int main(int argc, char *argv[])
     
     vector<string> ret;
 
+    ofstream fout;
+    fout.open("bin/answer.txt",ios::out);
+
     if (numWord == -1) {
         if (wordOrLetter)
             ret = G.wordDFS(head, tail, numWord);
         else
             ret = G.alphaDFS(head, tail, numWord);
         for(auto s : ret) 
-            cout<<s<<endl;
+            fout<<s<<endl;
     }
     else 
     {   
@@ -108,12 +111,13 @@ int main(int argc, char *argv[])
             ret = G.wordDFS(head, tail, numWord);
         else
             ret = G.alphaDFS(head, tail, numWord);
-        cout<<G.getList().size()<<endl;
+        fout<<G.getList().size()<<endl;
         for(auto group : G.getList()) {
             for(auto s : group)
-                cout<<s<<endl;
-            cout<<"\n";
+                fout<<s<<endl;
+            fout<<"\n";
         }
     }
+    fout.close();
     return 0;
 }
