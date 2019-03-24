@@ -88,6 +88,7 @@ void MainWindow::store()
     file.open(QIODevice::WriteOnly | QIODevice::Text);
     file.write(text.toUtf8());
     file.close();
+    QMessageBox::information(this, "导出成功", "结果导出成功！");
 }
 
 //开始处理
@@ -102,20 +103,35 @@ void MainWindow::start()
     //指定首尾字母
     char head = '\0', tail = '\0';
     if (ui->checkBox_h->isChecked())
-        head = ui->plainTextEdit_h->toPlainText().toStdString()[0];
-    if (!isalpha(head))
-        head = '\0';
+    {
+        head = ui->plainTextEdit_h->toPlainText().toLower().toStdString()[0];
+        if (!isalpha(head))
+        {
+            QMessageBox::critical(this, "参数错误", "h的参数必须为字母!");
+            return;
+        }
+    }
     if (ui->checkBox_t->isChecked())
+    {
         tail = ui->plainTextEdit_t->toPlainText().toStdString()[0];
-    if (!isalpha(tail))
-        tail = '\0';
+        if (!isalpha(tail))
+        {
+            QMessageBox::critical(this, "参数错误", "t的参数必须为字母!");
+            return;
+        }
+    }
 
     //指定单词数
     int num = -1;
     if (ui->checkBox_n->isChecked())
+    {
         num = ui->plainTextEdit_n->toPlainText().toInt();
-    if (num <= 0)
-        num = -1;
+        if (num <= 0)
+        {
+            QMessageBox::critical(this, "参数错误", "n的参数必须为正数!");
+            return;
+        }
+    }
 
     //搜索
     std::vector<std::string> ret;

@@ -19,6 +19,12 @@ Dialog::~Dialog()
 
 void Dialog::load()
 {
+    if (!wordGraph->isNull())
+    {
+        QMessageBox::critical(this, "导入错误", "不允许重复导入!");
+        return;
+    }
+
     wordGraph->create(ui->plainTextEdit->toPlainText());
     if (wordGraph->isNull())
     {

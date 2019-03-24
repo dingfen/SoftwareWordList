@@ -6,7 +6,6 @@
 #include <vector>
 #include <set>
 #include <unordered_map>
-#include <QString>
 #include <QStringList>
 
 using namespace std;
@@ -44,7 +43,9 @@ private:
                     {
                         words[s] = true;
                         ret.push_back(s);
+                        // 递归深搜 将 s的尾字母当下一个的开头传入
                         findLongestWordList(s.back(), num);
+                        // 取出最长的单词链
                         if (ret.size() > max.size())
                             max = ret;
                         ret.pop_back();
@@ -124,7 +125,7 @@ private:
         }
     }
 
-    // 单词： 递归方法反向寻找最长链
+    // 单词： 递归方法反向寻找最长链 实现原理同上
     void reverseLongestWordList(char end, int num) {
         if(num == 0)
             return ;
@@ -186,6 +187,7 @@ private:
                     ret.push_back(s);
                     alphalenth += s.size();
                     findLongestAlphaList(s.back(), num);
+                    if(ret.size() > 1)
                     if (alphalenth > maxalphalength)
                     {
                         maxalphalength = alphalenth;
@@ -213,6 +215,7 @@ private:
                     findLongestAlphaList(s.back(), end, num);
 
                     if (ret.back().back() == end)
+                        if(ret.size() > 1)
                         if (alphalenth > maxalphalength)
                         {
                             maxalphalength = alphalenth;
@@ -236,9 +239,10 @@ private:
                     ret.push_back(s);
                     alphalenth += s.size();
                     reverseLongestAlphaList(s.front(), num);
-                    if(alphalenth > maxalphalength) {
-                        maxalphalength = alphalenth;
-                        max = ret;
+                    if(ret.size() > 1)
+                        if(alphalenth > maxalphalength) {
+                            maxalphalength = alphalenth;
+                            max = ret;
                     }
                     alphalenth -= s.size();
                     ret.pop_back();
@@ -249,7 +253,7 @@ private:
     }
 
 public:
-    WordGraph() {};
+    WordGraph() {}
 
     ~WordGraph();
 
@@ -262,6 +266,8 @@ public:
     vector<string> alphaDFS(char head, char tail, int num);
 
     vector<vector<string>> getList();
+
+    unordered_map<string, bool> getwords();
 
     //判断图是否为空
     bool isNull();
