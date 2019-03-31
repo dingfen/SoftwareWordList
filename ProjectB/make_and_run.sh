@@ -1,9 +1,5 @@
 make
 
-if ($(LCOV), ) then 
-	echo "No lcov found.Please install lcov first."
-fi
-
 FILE="test/test_5.txt test/test_6.txt test/test_4.txt test/test_9.txt test/test_11.txt"
 
 bin/WordList $FILE

@@ -1,16 +1,33 @@
 # 2019 Software Engineering Lab 2
 
-## [实验要求](./Project1.md)
+## [实验要求](doc/Project1B.pdf)
+
+## [实验报告](doc/软件工程第二次实验.md)
 
 ## 编程环境
 
+## 开发环境
 Qt 5.12 
 
 linux Ubuntu 16.04 or Mac
 
 C++11
 
-## Core类 API
+## 测试用工具
+
+lcov
+
+## 如何运行
+
+在项目目录`ProjectB/`中，打开命令行，输入
+
+`> sh make_and_run.sh`
+
+Tips:  执行上述命令后会
+1. 将`src/`下的源代码进行编译，并生成测试需要的文件
+2. 运行`bin/WordList`，参数为`test/`下的一些测试文件，可以自行修改。
+3. 使用`lcov`工具，在当前目录下生成`result`文件夹，
+4. 使用浏览器，打开文件夹中`index.html`可以看到各文件、函数的测试覆盖率
 
 
 ## Core类 API接口
@@ -38,10 +55,3 @@ C++11
      */
 ```
 
-## 如何运行
-
-在项目目录中，打开命令行，并进行编译
-
-`> make`
-
-Usage:  执行`make`后会在当前目录下生成`result`文件夹，打开文件夹中`index.html`可以看到各文件、函数的测试覆盖率
