@@ -1,3 +1,7 @@
+if [ ! -d "bin" ]; then
+mkdir bin
+fi
+
 make
 
 FILE="test/test_5.txt test/test_6.txt test/test_4.txt test/test_9.txt test/test_11.txt"

@@ -81,11 +81,7 @@ int main(int argc, char const *argv[])
             wordsVec.push_back(input);
         }
     }
-    else {
-        cerr<<"please follow a test file name."<<endl;
-        exit(1);
-    }
-   
+
     char head[]= {'\0','\0','\0','s','a'};
     char tail[]= {'\0','\0','e', '\0','g'};
 
@@ -104,8 +100,6 @@ int main(int argc, char const *argv[])
             cout<<"Test "<<i+1<<" Success"<<endl;
         else {
             cout<<"Test "<<i+1<<" Fail!"<<endl;
-            for(auto j:retWord[i])
-                cout<<j<<" ";
         }
         
     }
