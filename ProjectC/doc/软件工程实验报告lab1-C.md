@@ -11,28 +11,34 @@
  - 若`-n`所要求的单词链长度大于最长的单词链长度，那么程序会输出错误信息进行提示：`Error: None word list satisfies your need.`
  - 若没有单词链存在（有两个及以上的单词组成的称之为单词链），程序会返回错误信息：`Error: Too few words in the file. And none word list exists.`
  - 若用户输入了一个不存在的文件，程序会进行报错：`The file xxxx cannot be found`
- - 若用户输入了一个不存在的选项，例如 `-x` ,程序也会进行报错
  - 用户交互时，一定要在所给的输入文件前指定选项`-n`还是`-w`，否则会报错：`Error: No main instruction`
  - 由于寻找最长单词链的算法复杂度较高，因此对于上百单词数量的文件，程序运行时间会比较长。
+ - 当使用`-h`指定首字母，但随后传入的参数并非字母时将会报错：`Error: -h must be followed by a letter`
+ - 当使用`-t`指定尾字母，但随后传入的参数并非字母时将会报错：`Error: -t must be followed by a letter`
+ - 当使用`-n`指定单词链长度，但随后传入的参数并非一个长整形数时将会报错：`Error: -n must be followed by a integer`
+ - 当用户输入了一个不存在的选项（如 `-x`）时报错：` Error: unknown option ...`
+ - 当用户输入了多次`-n`与`-w`指令时报错：`Error: multiple main instructions`
+ - 当用户并未输入`-n -w`中的任一指令时报错：`Error: No main instruction`
+ - 
 
 ## Core类 API接口
 
 ```C++
     /* vector<string> Core::gen_chain_word(vector<string> words, char head, char tail);
     * 这个函数接受三个参数, words 为输入的单词列表, head 为所要求的单词链的头字母, 
-    * tail 万所要求的单词链尾字母,函数返回值为所要求的最长单词个数的单词链 vector<string>
+    * tail 为所要求的单词链尾字母,函数返回值为所要求的最长单词个数的单词链 vector<string>
     */
     vector<string> Core::gen_chain_word(vector<string> words, char head, char tail);
 
     /* vector<string> Core::gen_chain_char(vector<string> words, char head, char tail);
     * 这个函数接受三个参数, words 为输入的单词列表, head 为所要求的单词链的头字母, 
-    * tail 万所要求的单词链尾字母,函数返回值为所要求的最多字母个数的单词链 vector<string>
+    * tail 为所要求的单词链尾字母,函数返回值为所要求的最多字母个数的单词链 vector<string>
     */
     vector<string> Core::gen_chain_char(vector<string> words, char head, char tail);
 
     /* vector<vector<string>> Core::gen_chain_word(vector<string> words, int num, char head, char tail);
     * 这个函数接受三个参数, words 为输入的单词列表, head 为所要求的单词链的头字母, 
-    * tail 万所要求的单词链尾字母,函数返回值为所要求的单词链 num 为所要求的字母链的个数
+    * tail 为所要求的单词链尾字母,函数返回值为所要求的单词链 num 为所要求的字母链的个数
     */
     vector<vector<string>> Core::gen_chain_word(vector<string> words, int num, char head, char tail);
 

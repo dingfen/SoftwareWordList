@@ -45,7 +45,7 @@ int main(int argc, char *argv[])
                 head = *optarg;
             else{
                 //不是合法字母时报错
-                cerr << "Error: -h must be followed by a alpha" << endl;
+                cerr << "Error: -h must be followed by a letter" << endl;
                 exit(1);
             }
             break;
@@ -54,7 +54,7 @@ int main(int argc, char *argv[])
                 tail = *optarg;
             else{
                 //非法报错
-                cerr << "Error: -t must be followed by a alpha" << endl;
+                cerr << "Error: -t must be followed by a letter" << endl;
                 exit(1);
             }
             break;

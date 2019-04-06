@@ -35,19 +35,19 @@ Tips:  执行上述命令后会
 ```C++
     /* vector<string> Core::gen_chain_word(vector<string> words, char head, char tail);
     * 这个函数接受三个参数, words 为输入的单词列表, head 为所要求的单词链的头字母, 
-    * tail 万所要求的单词链尾字母,函数返回值为所要求的最长单词个数的单词链 vector<string>
+    * tail 为所要求的单词链尾字母,函数返回值为所要求的最长单词个数的单词链 vector<string>
     */
     vector<string> Core::gen_chain_word(vector<string> words, char head, char tail);
 
     /* vector<string> Core::gen_chain_char(vector<string> words, char head, char tail);
     * 这个函数接受三个参数, words 为输入的单词列表, head 为所要求的单词链的头字母, 
-    * tail 万所要求的单词链尾字母,函数返回值为所要求的最多字母个数的单词链 vector<string>
+    * tail 为所要求的单词链尾字母,函数返回值为所要求的最多字母个数的单词链 vector<string>
     */
     vector<string> Core::gen_chain_char(vector<string> words, char head, char tail);
 
     /* vector<vector<string>> Core::gen_chain_word(vector<string> words, int num, char head, char tail);
     * 这个函数接受三个参数, words 为输入的单词列表, head 为所要求的单词链的头字母, 
-    * tail 万所要求的单词链尾字母,函数返回值为所要求的单词链 num 为所要求的字母链的个数
+    * tail 为所要求的单词链尾字母,函数返回值为所要求的单词链 num 为所要求的字母链的个数
     */
     vector<vector<string>> Core::gen_chain_word(vector<string> words, int num, char head, char tail);
 
