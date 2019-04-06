@@ -115,6 +115,8 @@ int main(int argc, char *argv[])
             fout<<"\n";
         }
     }
+
+    cout<<"WordList execution Completed."<<endl;
     fout.close();
     return 0;
 }

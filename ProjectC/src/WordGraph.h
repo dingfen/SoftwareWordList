@@ -7,6 +7,7 @@
 #include <vector>
 #include <set>
 #include <unordered_map>
+#include <exception>
 
 using namespace std;
 
@@ -44,7 +45,7 @@ private:
                         words[s] = true;
                         ret.push_back(s);
                         // 递归深搜 将 s的尾字母当下一个的开头传入
-                        findLongestWordList(s.back(), num);
+                        findLongestWordList(tolower(s.back()), num);
                         // 取出最长的单词链
                         if (ret.size() > max.size())
                             max = ret;
@@ -65,7 +66,7 @@ private:
                         words[s] = true;
                         ret.push_back(s);
                         num--;
-                        findLongestWordList(s.back(), num);
+                        findLongestWordList(tolower(s.back()), num);
                         if(num == 0)
                             List.push_back(ret);
                         num++;
@@ -91,7 +92,7 @@ private:
                     {
                         words[s] = true;
                         ret.push_back(s);
-                        findLongestWordList(s.back(), end, num);
+                        findLongestWordList(tolower(s.back()), end, num);
 
                         if (ret.back().back() == end)
                             if (ret.size() > max.size())
@@ -113,7 +114,7 @@ private:
                         words[s] = true;
                         ret.push_back(s);
                         num--;
-                        findLongestWordList(s.back(), end, num);
+                        findLongestWordList(tolower(s.back()), end, num);
                         if(num == 0 && ret.back().back()==end)
                             List.push_back(ret);
                         num++;
@@ -141,7 +142,7 @@ private:
                     {
                         words[s] = true;
                         ret.push_back(s);
-                        reverseLongestWordList(s.front(), num);
+                        reverseLongestWordList(tolower(s.front()), num);
                         if (ret.size() > max.size())
                             max = ret;
                         ret.pop_back();
@@ -162,7 +163,7 @@ private:
                         words[s] = true;
                         ret.push_back(s);
                         num--;
-                        reverseLongestWordList(s.front(), num);
+                        reverseLongestWordList(tolower(s.front()), num);
                         if (num == 0)
                             List.push_back(ret);
                         num++;
@@ -186,7 +187,7 @@ private:
                     words[s] = true;
                     ret.push_back(s);
                     alphalenth += s.size();
-                    findLongestAlphaList(s.back(), num);
+                    findLongestAlphaList(tolower(s.back()), num);
                     if(ret.size() > 1)
                     if (alphalenth > maxalphalength)
                     {
@@ -212,7 +213,7 @@ private:
                     words[s] = true;
                     ret.push_back(s);
                     alphalenth += s.size();
-                    findLongestAlphaList(s.back(), end, num);
+                    findLongestAlphaList(tolower(s.back()), end, num);
 
                     if (ret.back().back() == end)
                         if(ret.size() > 1)
@@ -238,7 +239,7 @@ private:
                     words[s]=true;
                     ret.push_back(s);
                     alphalenth += s.size();
-                    reverseLongestAlphaList(s.front(), num);
+                    reverseLongestAlphaList(tolower(s.front()), num);
                     if(ret.size() > 1)
                         if(alphalenth > maxalphalength) {
                             maxalphalength = alphalenth;    

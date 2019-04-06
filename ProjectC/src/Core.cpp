@@ -25,39 +25,62 @@ vector<string> parseLine(string line)
 
 vector<string> Core::gen_chain_word(vector<string> words, char head, char tail)
 {
-    WordGraph G;
-    G.create(words);
-    
-    vector<string> ret = G.wordDFS(head, tail, -1);
-    
+    vector<string> ret;
+    try
+    {
+        WordGraph G;
+        G.create(words);
+        ret = G.wordDFS(head, tail, -1);
+    }
+    catch(const std::exception& e)
+    {
+        std::cerr << e.what() << '\n';
+    }
+
     return ret;
 }
 
 
 vector<string> Core::gen_chain_char(vector<string> words, char head, char tail)
 {
-    WordGraph G;
-    G.create(words);
-    
-    vector<string> ret = G.alphaDFS(head, tail, -1);
-    
+    vector<string> ret;
+    try 
+    {
+        WordGraph G;
+        G.create(words);
+        ret = G.alphaDFS(head, tail, -1);
+    }
+    catch(const std::exception& e)
+    {
+        std::cerr << e.what() <<endl;
+    }
     return ret;
 }
 
 vector<vector<string>> Core::gen_chain_word(vector<string> words, int num, char head, char tail)
 {
+    vector<string> ret;
     WordGraph G;
+    try
+    {
     G.create(words);
-    
-    vector<string> ret = G.wordDFS(head, tail, num);
-    
+    ret = G.wordDFS(head, tail, num);
+    }
+    catch(const std::exception& e)
+    {
+        std::cerr<< e.what() <<endl;
+    }
     return G.getList();
 }
 
 vector<string> Core::text_preprocess(string path)
 {
     ifstream fin;
+    
     vector<string> words;
+    // 避免出现重复单词
+    set<string> set_word;
+
     fin.open(path.c_str(), ios::in);
     if (!fin) {
         cerr << "The file " << path<< " cannot be found.\n";
@@ -69,16 +92,18 @@ vector<string> Core::text_preprocess(string path)
     {
         getline(fin, line);
         vector<string> s = parseLine(line);
-        words.insert(words.end(), s.begin(), s.end());
+        set_word.insert(s.begin(), s.end());
     } while (!fin.eof());
 
     fin.close();
 
     // 单词太少 无法组成单词链
-    if(words.size() < 2) {
-        cerr<< "Too few words in the file.None word list exists." <<endl;
-        exit(1);
-    }
-    
+    //if(set_word.size() < 2) {
+    //    cerr<< "Too few words in the file.None word list exists." <<endl;
+    //    exit(1);
+    //}
+
+    for(auto s : set_word)
+        words.push_back(s);
     return words;
 }

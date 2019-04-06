@@ -14,6 +14,23 @@ vector<vector<string>> WordGraph::getList()
     return List;
 }
 
+
+class TooFewWordException : public exception
+{
+    virtual const char* what() const throw() {
+        return "Error: Too few words in the file. And none word list exists.";
+    };
+} tooFewWord;
+
+class NoneWordListException : public exception
+{
+    virtual const char* what() const throw() {
+        return "Error: None word list satisfies your need.";
+    };
+} noWordList;
+
+
+
 vector<string> WordGraph::wordDFS(char head, char tail, int num)
 {
     // 遍历所有的单词，然后DFS 求出最长的单词链 并保存
@@ -47,8 +64,9 @@ vector<string> WordGraph::wordDFS(char head, char tail, int num)
         ret.clear();
         findLongestWordList(head, tail, num);
     }
+
     if(max.size() < 2 && List.size() == 0) {
-        cerr<< "None word list exists." <<endl;
+        throw noWordList;
         return vector<string>();
     }
     return max;
@@ -81,6 +99,9 @@ vector<string> WordGraph::alphaDFS(char head, char tail, int num)
         ret.clear();
         findLongestAlphaList(head, tail, num);
     }
+    if(max.size() < 2) {
+        throw noWordList;
+    }
     return max;
 }
 
@@ -88,7 +109,7 @@ void WordGraph::create(vector<string> words)
 {
     // 单词太少 无法组成单词链
     if(words.size() < 2) {
-        cerr<< "Too few words in the file.None word list exists." <<endl;
+        throw tooFewWord;
         return;
     }
 
