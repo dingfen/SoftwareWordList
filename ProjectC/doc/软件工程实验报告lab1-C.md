@@ -40,7 +40,7 @@
     vector<string> text_preprocess(string path);
 ```
 
-### 错误处理
+### 错误样例
 
  - 若`-n`所要求的单词链长度大于最长的单词链长度，那么程序会输出错误信息进行提示：
 
@@ -91,6 +91,45 @@
     错误样例：`bin/WordList`
 
  - 由于寻找最长单词链的算法复杂度较高，因此对于上百单词数量的文件，程序运行时间会比较长。
+
+### 错误处理
+
+```C++
+// 对于 -n 后接负数的情况进行处理
+class NumException : public exception
+{
+    virtual const char* what() const throw() {
+        return "Error: -n must be followed by a positive interger.";
+    };
+} numException;
+
+// 对文件中单词过少情况进行的处理
+class TooFewWordException : public exception
+{
+    virtual const char* what() const throw() {
+        return "Error: Too few words in the file. And none word list exists.";
+    };
+} tooFewWord;
+
+// 对文件中找不到合法的单词的处理
+class NoneWordListException : public exception
+{
+    virtual const char* what() const throw() {
+        return "Error: None word list satisfies your need.";
+    };
+} noWordList;
+
+// 对 -h -t 后没有接字母的情况的处理
+class NotLetterException : public exception
+{
+    virtual const char* what() const throw() {
+        return "Error: -t and -h must be followed by a letter.";
+    };
+} wrongChar;
+
+```
+
+
 
 ## 测试用例设计思想
 
