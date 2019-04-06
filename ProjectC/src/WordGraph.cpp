@@ -29,10 +29,19 @@ class NoneWordListException : public exception
     };
 } noWordList;
 
+class NotLetterException : public exception
+{
+    virtual const char* what() const throw() {
+        return "Error: -t and -h must be followed by a letter.";
+    };
+} wrongChar;
 
 
 vector<string> WordGraph::wordDFS(char head, char tail, int num)
 {
+    if((!isalpha(head) && (head != '\0')) || (!isalpha(tail) && tail != '\0')) {
+        throw wrongChar;
+    }
     // 遍历所有的单词，然后DFS 求出最长的单词链 并保存
     if (head == '\0' && tail == '\0')
     {
@@ -75,6 +84,9 @@ vector<string> WordGraph::wordDFS(char head, char tail, int num)
 
 vector<string> WordGraph::alphaDFS(char head, char tail, int num)
 {
+    if((!isalpha(head) && (head != '\0')) || (!isalpha(tail) && tail != '\0')) {
+        throw wrongChar;
+    }
     if (head == '\0' && tail == '\0')
     {
         for (auto w : heads)
