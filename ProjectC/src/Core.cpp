@@ -1,6 +1,13 @@
 
 #include "Core.h"
 
+class NumException : public exception
+{
+    virtual const char* what() const throw() {
+        return "Error: -n must be followed by a positive interger.";
+    };
+} numException;
+
 vector<string> parseLine(string line)
 {
     size_t pos;
@@ -63,8 +70,10 @@ vector<vector<string>> Core::gen_chain_word(vector<string> words, int num, char 
     WordGraph G;
     try
     {
-    G.create(words);
-    ret = G.wordDFS(head, tail, num);
+        if(num < 1)
+            throw numException;
+        G.create(words);
+        ret = G.wordDFS(head, tail, num);
     }
     catch(const std::exception& e)
     {

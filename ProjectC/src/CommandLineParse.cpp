@@ -40,34 +40,19 @@ int main(int argc, char *argv[])
             flagOfMain ++;
             filename = optarg;
             break;
-        case 'h'://指定首字母
-            if (isalpha(*optarg))
+        case 'h':
                 head = *optarg;
-            else{
-                //不是合法字母时报错
-                cerr << "Error: -h must be followed by a alpha" << endl;
-                exit(1);
-            }
             break;
-        case 't'://指定结束字母
-            if (isalpha(*optarg))
+        case 't':
                 tail = *optarg;
-            else{
-                //非法报错
-                cerr << "Error: -t must be followed by a alpha" << endl;
-                exit(1);
-            }
             break;
         case 'n'://指定单词个数
             numWord = atoi(optarg);
-            if(!numWord){
-                cerr << "Error: -n must be followed by a interger" << endl;
-                exit(1);
-            }
             break;
         case '?':
             cerr << "Error: unknown option: " << (char)optopt << endl;
             cerr << "Error: opterr: " << opterr << endl;
+            exit(1);
             break;
         }
     }
